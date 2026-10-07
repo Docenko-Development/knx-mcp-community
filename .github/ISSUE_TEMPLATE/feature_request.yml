@@ -1,0 +1,48 @@
+name: Feature request
+description: Suggest an improvement to KNX-MCP
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Feature ideas are also welcome in Discussions when you want to explore the idea with the community first.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the KNX / ETS workflow or limitation rather than only the proposed implementation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behaviour
+      description: How should KNX-MCP help?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Project reading / analysis
+        - Project editing
+        - Group addresses
+        - Devices / parameters
+        - KNX bus / telegrams
+        - ETS navigation
+        - MCP client integration
+        - UI / permissions
+        - Documentation
+        - Skills / workflows
+        - Other
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add anonymised examples or screenshots if useful.

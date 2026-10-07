@@ -1,0 +1,71 @@
+name: Bug report
+description: Report a reproducible problem in KNX-MCP
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem. Please remove customer data, project files, passwords and keys before posting.
+
+  - type: input
+    id: version
+    attributes:
+      label: KNX-MCP version
+      placeholder: "1.1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: ets
+    attributes:
+      label: ETS version
+      placeholder: "ETS6 6.x or ETS5 5.7.x"
+    validations:
+      required: true
+
+  - type: input
+    id: client
+    attributes:
+      label: MCP / AI client
+      placeholder: "Claude Desktop, Claude Code, Copilot, ChatGPT, Cursor, ..."
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the observed behaviour and any error shown by KNX-MCP or the client.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Use a minimal, anonymised example where possible.
+      placeholder: |
+        1. Open ...
+        2. Enable ...
+        3. Ask the assistant ...
+        4. KNX-MCP returns ...
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Additional diagnostics
+      description: Paste only anonymised log excerpts or screenshots. Do not upload an ETS project unless specifically requested privately.
+
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed customer data, project files, passwords, access keys and KNX Secure secrets from this report.
+          required: true

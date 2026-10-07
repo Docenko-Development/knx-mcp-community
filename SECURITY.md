@@ -1,9 +1,34 @@
-# Security
+# Security policy
 
-Please report security problems **privately**, not as a public issue or discussion:
+Please report security vulnerabilities **privately**. Do not open a public issue or discussion for a security problem.
 
-**gerald@docenko.eu** — subject "KNX-MCP security"
+## Contact
 
-Include the KNX-MCP version, the ETS version and a short description. You will get an answer as soon as possible; a fix is published as a new, KNX-validated version.
+Email: **gerald@docenko.eu**  
+Subject: **KNX-MCP security**
 
-Never send project files, passwords or keys unless asked for them in a direct conversation.
+## Please include
+
+- KNX-MCP version
+- ETS version
+- Windows version if relevant
+- AI/MCP client if relevant
+- a concise description of the issue
+- steps to reproduce, if known
+- the security impact you expect
+
+## Do not include unless specifically requested
+
+- ETS project files
+- customer names, addresses or building data
+- passwords or MCP access keys
+- KNX Secure keys or certificates containing secrets
+- private customer logs or screenshots with identifiable data
+
+If a screenshot or log excerpt is useful, please anonymise it first.
+
+## Disclosure
+
+Please allow time to investigate and prepare a validated KNX-MCP update before publishing technical details that could put users or installations at risk.
+
+Security fixes are distributed through the normal KNX-MCP release process and, where required, as a newly validated version in MyKNX.

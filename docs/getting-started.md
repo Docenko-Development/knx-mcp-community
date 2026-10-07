@@ -1,31 +1,53 @@
 # Getting started with KNX-MCP
 
-## 1. Install
+This guide covers **KNX-MCP 1.1.0.0 · Release 1**.
 
-1. Get **KNX-MCP** from the KNX Online Shop (MyKNX).
-2. In ETS: *Settings → ETS Apps* → install / activate KNX-MCP.
-3. Open a project. The KNX-MCP panel shows four tabs: Live monitor, Tools, Server settings, Protocol.
+## 1. Install KNX-MCP
 
-## 2. Switch the project on
+1. Get **KNX-MCP** from the KNX Online Shop (MyKNX): https://my.knx.org/shop?action=search&search=KNX-MCP
+2. Install and activate the app in ETS.
+3. Open an ETS project.
+4. Open the KNX-MCP panel. It contains **Live monitor**, **Tools**, **Server settings** and **Protocol**.
 
-New projects start **switched off**. In the panel or the ETS toolbar choose **"Switch project MCP on"**. Only switched-on projects are reachable by an AI client.
+KNX-MCP is currently available free of charge in the KNX Online Shop.
 
-Default endpoints (the port can be changed in *Server settings*):
+## 2. Enable MCP for the project
+
+New projects start with **Project MCP switched off**.
+
+In the KNX-MCP panel or ETS toolbar, choose **Switch project MCP on**. Only projects that are switched on are reachable through MCP.
+
+Default endpoints:
 
 | ETS | Endpoint |
 |---|---|
 | ETS6 | `http://127.0.0.1:51900/mcp` |
 | ETS5 | `http://127.0.0.1:51950/mcp` |
 
-One endpoint serves all projects open in that ETS. With more than one project switched on, the assistant names the project in each call.
+The port can be changed in **Server settings**. One endpoint serves all enabled projects open in the same ETS instance.
 
-## 3. Connect your AI client
+## 3. Start safely
 
-The panel (*Server settings → Client configuration*) shows ready-to-copy snippets **including your access key**. The examples below use `<KEY>` as a placeholder.
+For a first connection, consider enabling **Read-only** in the Tools tab. This lets the assistant inspect the project without changing it or sending values to the bus.
 
-### Claude Desktop (configuration file, via mcp-remote)
+Good first requests are:
 
-`claude_desktop_config.json` only supports local (stdio) servers, so the bridge `mcp-remote` is used. Requires Node.js.
+- “Which projects can you reach?”
+- “Give me an overview of the building and group-address structure.”
+- “Which group addresses have no datapoint type or more than one sender?”
+- “Show me the devices in room 2.01.”
+
+When you are comfortable with the connection, configure the permission level for individual tool groups or tools.
+
+## 4. Connect an MCP client
+
+The KNX-MCP panel shows ready-to-copy client configuration in **Server settings → Client configuration**, including the current access key.
+
+Keep the access key private. The examples below use `<KEY>` as a placeholder.
+
+### Claude Desktop via `mcp-remote`
+
+For a client configuration that starts local stdio processes, use `mcp-remote` as the HTTP bridge. This requires Node.js.
 
 ```json
 {
@@ -44,9 +66,9 @@ The panel (*Server settings → Client configuration*) shows ready-to-copy snipp
 }
 ```
 
-Do **not** put a `url` entry into `claude_desktop_config.json` — Claude Desktop may silently drop the whole `mcpServers` section.
+For ETS5, use port `51950` unless you changed it in KNX-MCP.
 
-### Claude Code and other clients with native HTTP support
+### Clients with native MCP-over-HTTP support
 
 ```json
 {
@@ -54,43 +76,93 @@ Do **not** put a `url` entry into `claude_desktop_config.json` — Claude Deskto
     "knx-ets6": {
       "type": "http",
       "url": "http://127.0.0.1:51900/mcp",
-      "headers": { "X-KnxMcp-Key": "<KEY>" }
+      "headers": {
+        "X-KnxMcp-Key": "<KEY>"
+      }
     }
   }
 }
 ```
 
-### Other MCP clients
+Other MCP-compatible clients can connect directly when they support Streamable HTTP. Clients that only start local programs can use an HTTP-to-stdio bridge such as `mcp-remote`.
 
-Any client that speaks MCP over HTTP (Streamable HTTP) works with the endpoint URL and the header `X-KnxMcp-Key`. Clients that only start local programs use `mcp-remote` as shown above.
+## 5. Understand permissions
 
-## 4. First steps
+KNX-MCP permissions are configured per project and per tool.
 
-Ask your assistant, for example:
+| Mode | Meaning |
+|---|---|
+| **Allowed** | runs directly |
+| **Confirmation required** | waits for approval in the ETS panel |
+| **Blocked** | cannot run |
 
-- "Which projects can you reach?"
-- "Give me an overview of the building and the group address structure."
-- "Which group addresses have no datapoint type or more than one sender?"
-- "Create switch, dimming value and status addresses for rooms 2.01 to 2.06."
-
-Changes appear in the panel and wait for your confirmation. Undo works as usual in ETS.
-
-## 5. Bus functions
-
-Select a bus connection in ETS. KNX-MCP listens and sends through that connection.
-In **ETS5**, telegrams captured by the app itself carry no sender address — start a group monitor in ETS and choose **KNX-MCP as its decoding app** to get the sender.
-
-## 6. Network access (optional)
-
-By default the endpoint is reachable from the local computer only. If you enable network access in *Server settings*, keep the access key secret and use a VPN or a trusted network: the connection is plain HTTP without encryption. `mcp-remote` needs `--allow-http` for this; some clients refuse plain HTTP over the network entirely.
-
-## 7. Permissions
+Default behaviour in Release 1:
 
 | Group | Default |
 |---|---|
 | Read, analyse, navigate, export | allowed |
-| Telegrams | allowed — sending a value asks every time |
+| Telegram tools | allowed; sending a value requires confirmation for every send |
 | Change project | confirmation required |
 | Program devices | blocked |
 
-Every tool can be set to *allowed*, *confirmation* or *blocked*. The read-only switch per project blocks all changes and sending.
+The project-wide **Read-only** switch blocks project changes and bus writes regardless of individual tool settings.
+
+Project changes are created as named ETS undo steps.
+
+## 6. Several projects and several clients
+
+KNX-MCP can expose several open projects through one endpoint in both ETS5 and ETS6.
+
+When more than one project is enabled, the MCP client must specify the project for project-specific calls. KNX-MCP does not guess which project should be used.
+
+Several MCP clients can be connected at the same time. Connected clients can be reviewed, logged off or blocked in the KNX-MCP panel.
+
+## 7. Bus functions
+
+Select a working bus connection in ETS. KNX-MCP can monitor telegrams, read and send group values, identify devices and scan a line.
+
+In **ETS5**, telegrams captured directly by KNX-MCP do not contain the sender address. If you need sender information, start the ETS group monitor and select **KNX-MCP as the decoding app**.
+
+Sending a group value requires confirmation by default for every telegram. Device programming is blocked by default until explicitly enabled.
+
+## 8. Optional network access
+
+By default, the MCP endpoint is reachable only from the local ETS computer.
+
+If you explicitly enable network access in **Server settings**:
+
+- keep the access key secret
+- restrict access to trusted systems
+- prefer a VPN or trusted network
+- remember that the KNX-MCP endpoint itself uses **plain HTTP without TLS**
+
+Do not expose the endpoint directly to the public internet.
+
+## 9. Troubleshooting
+
+### The client cannot connect
+
+Check:
+
+- Project MCP is switched on.
+- The endpoint and port match the ETS version / configured port.
+- The access key is current.
+- No local firewall rule blocks the selected port.
+
+### The assistant asks which project to use
+
+This is expected when several projects are enabled. Choose the project explicitly.
+
+### A write operation does not run
+
+Check the tool permission and Read-only mode. The tool may be set to **Confirmation required** or **Blocked**.
+
+### ETS5 shows telegrams without a sender
+
+Use the ETS group monitor with KNX-MCP as decoding app when sender information is required.
+
+## 10. Need help?
+
+- Questions and setup help: https://github.com/Docenko-Development/knx-mcp-community/discussions
+- Bugs: https://github.com/Docenko-Development/knx-mcp-community/issues
+- Security: see [../SECURITY.md](../SECURITY.md)
