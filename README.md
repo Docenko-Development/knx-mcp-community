@@ -1,4 +1,20 @@
-# KNX-MCP Community
+<p align="center">
+  <a href="https://knx-mcp.com/">
+    <img src="https://knx-mcp.com/assets/img/knx-mcp-logo-960.webp" alt="KNX-MCP — AI assistant for ETS5 and ETS6" width="300">
+  </a>
+</p>
+
+<h1 align="center">KNX-MCP Community</h1>
+
+<p align="center"><strong>Your AI assistant works right inside the ETS project.</strong></p>
+<p align="center">Community · Setup help · Ideas · Safe AI workflows for ETS5 and ETS6</p>
+
+<p align="center">
+  <a href="https://my.knx.org/shop?action=search&amp;search=KNX-MCP">Get KNX-MCP</a> ·
+  <a href="https://knx-mcp.com/">Product website</a> ·
+  <a href="docs/getting-started.md">Get started</a> ·
+  <a href="https://github.com/Docenko-Development/knx-mcp-community/discussions">Discussions</a>
+</p>
 
 **KNX-MCP** is an ETS App that connects an open ETS project to MCP-compatible AI assistants such as Claude, Microsoft Copilot or ChatGPT through the **Model Context Protocol (MCP)** and the official ETS SDK.
 
@@ -12,6 +28,18 @@ This repository is the public community space for **questions, bug reports, feat
 | Website | https://knx-mcp.com |
 | Publisher | Gerald Docenko |
 
+## Start in four steps
+
+1. Get **KNX-MCP** from the [KNX Online Shop](https://my.knx.org/shop?action=search&search=KNX-MCP) and install the ETS App.
+2. Open an ETS project and choose **Switch project MCP on** in KNX-MCP.
+3. Under **Server settings → Client configuration**, copy the setup for your MCP client. Keep the access key private.
+4. For your first session, enable **Read-only** mode and try:
+
+> Which projects are currently open in ETS? Please also list information about each of these projects.
+
+See [Getting started](docs/getting-started.md) for configuration details and troubleshooting. Only projects enabled for MCP are accessible through the connection.
+
+
 ## Quick links
 
 - **Get KNX-MCP:** https://my.knx.org/shop?action=search&search=KNX-MCP
@@ -19,6 +47,7 @@ This repository is the public community space for **questions, bug reports, feat
 - **Getting started:** [docs/getting-started.md](docs/getting-started.md)
 - **Frequently asked questions:** [docs/faq.md](docs/faq.md)
 - **Questions & workflows:** https://github.com/Docenko-Development/knx-mcp-community/discussions
+- **Discussion categories and community guide:** [docs/community-guide.md](docs/community-guide.md)
 - **Bug reports:** https://github.com/Docenko-Development/knx-mcp-community/issues
 - **Skills:** [skills/README.md](skills/README.md) · [Project overview](skills/project-overview-read-only.md) · [Group-address review](skills/group-address-review-read-only.md)
 - **Release notes:** [1.1.0.0 · Release 1](docs/release-notes/1.1.0.0.md)
@@ -66,6 +95,8 @@ Optional network access can be enabled explicitly. The KNX-MCP endpoint uses pla
 | discuss a commercial or confidential matter | **gerald@docenko.eu** |
 
 Please **never post ETS project files, customer data, passwords, access keys, KNX Secure keys or other confidential information** in a public issue or discussion. Anonymised screenshots and excerpts are welcome.
+
+For discussion topics, choose **Q&A** for setup and usage questions, **Ideas** for improvements, or **Show and tell** for anonymised practical workflows, where those categories are enabled. See the [community guide](docs/community-guide.md) for triage and accepted-answer guidance.
 
 See [SUPPORT.md](SUPPORT.md) for the complete support routing.
 
