@@ -17,6 +17,13 @@ Examples:
 
 Skills must be generic enough to work across projects. Do not include customer-specific addresses, project names, credentials or keys.
 
+## Example skills
+
+- [Read-only project overview](project-overview-read-only.md) — inventory the projects available to the MCP client and summarise selected ETS structures without changing them.
+- [Read-only group-address review](group-address-review-read-only.md) — inspect address metadata for potential quality issues without changing the project or using the bus.
+
+Skills are **optional**. They do not replace KNX-MCP's built-in tool descriptions or its project and tool permissions.
+
 ## Recommended structure for each skill
 
 Each skill should state:

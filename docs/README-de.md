@@ -32,3 +32,11 @@ Der MCP-Endpunkt ist standardmäßig nur lokal auf dem ETS-Rechner erreichbar. K
 - vertrauliche oder geschäftliche Anfrage → `gerald@docenko.eu`
 
 Bitte keine KNX-Projektdateien, Kundendaten, Passwörter, Zugangsschlüssel oder KNX-Secure-Schlüssel öffentlich hochladen.
+## Weitere Anleitungen
+
+- [Installation und Verbindung (Englisch)](getting-started.md)
+- [Häufige Fragen / FAQ (Englisch)](faq.md)
+- [KNX-MCP Skills und Praxisabläufe (Englisch)](../skills/README.md)
+- [Projektübersicht nur lesend (Englisch)](../skills/project-overview-read-only.md)
+
+Skills sind **optional** und ersetzen keine KNX-MCP-Freigaben.
