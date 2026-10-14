@@ -17,9 +17,10 @@ This repository is the public community space for **questions, bug reports, feat
 - **Get KNX-MCP:** https://my.knx.org/shop?action=search&search=KNX-MCP
 - **Website:** https://knx-mcp.com
 - **Getting started:** [docs/getting-started.md](docs/getting-started.md)
+- **Frequently asked questions:** [docs/faq.md](docs/faq.md)
 - **Questions & workflows:** https://github.com/Docenko-Development/knx-mcp-community/discussions
 - **Bug reports:** https://github.com/Docenko-Development/knx-mcp-community/issues
-- **Skills:** [skills/README.md](skills/README.md)
+- **Skills:** [skills/README.md](skills/README.md) · [Project overview](skills/project-overview-read-only.md) · [Group-address review](skills/group-address-review-read-only.md)
 - **Release notes:** [1.1.0.0 · Release 1](docs/release-notes/1.1.0.0.md)
 - **Security:** [SECURITY.md](SECURITY.md)
 
@@ -70,7 +71,7 @@ See [SUPPORT.md](SUPPORT.md) for the complete support routing.
 
 ## Skills
 
-The [`skills/`](skills/) directory is intended for reusable prompts, workflows and AI-client instructions that work with KNX-MCP. Skills should be project-independent, explain required permissions and make clear whether they only read data or may change the ETS project or access the bus.
+The [`skills/`](skills/) directory contains two starting examples for [read-only project overviews](skills/project-overview-read-only.md) and [read-only group-address reviews](skills/group-address-review-read-only.md), plus guidance for contributing reusable prompts and AI-client workflows. These skills are **optional**, project-independent and do not bypass KNX-MCP permissions.
 
 ## Languages
 

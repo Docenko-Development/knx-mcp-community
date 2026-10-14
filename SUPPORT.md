@@ -14,6 +14,8 @@ This repository is the public support and community space for KNX-MCP.
 | Security vulnerability | **Private email** — see `SECURITY.md` |
 | Commercial / confidential matter | `gerald@docenko.eu` |
 
+Before posting, check [Getting started](docs/getting-started.md) and the [FAQ](docs/faq.md) for common activation, connection and permission questions.
+
 ## Before reporting a bug
 
 Please check that you are using the current KNX-MCP release and include at least:
