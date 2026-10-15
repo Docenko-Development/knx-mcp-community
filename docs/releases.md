@@ -8,6 +8,10 @@ This community repository documents official **KNX-MCP ETS App** releases. The a
 
 **Currently free of charge** in the KNX Online Shop, subject to future change. The MyKNX listing is authoritative for availability and installation.
 
+## Next app version (planned)
+
+The next proposed release is **KNX-MCP 1.2.0.0**. See [community issue triage and verification plan](roadmap/knx-mcp-1.2.0.0-issue-triage.md). Issues are **candidates**, not delivered fixes; 1.2.0.0 has not yet been published in MyKNX.
+
 ## What GitHub Releases contain
 
 [GitHub Releases](https://github.com/Docenko-Development/knx-mcp-community/releases) are intended as a public **announcement and version history**, with descriptions, compatibility and links to MyKNX. No KNX-MCP ETS App installers, activation files, or proprietary application sources are attached here.
