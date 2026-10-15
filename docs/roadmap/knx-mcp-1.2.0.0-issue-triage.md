@@ -1,11 +1,12 @@
 # KNX-MCP 1.2.0.0 — Community issue triage and release plan
 
 **Planning snapshot:** 15 October 2026  
+**Last triage update:** 15 October 2026 — milestone verified and first development-build fixes recorded  
 **Repository:** [Docenko-Development/knx-mcp-community](https://github.com/Docenko-Development/knx-mcp-community)  
 **Product:** KNX-MCP, ETS App for ETS5 and ETS6  
 **Current verified public app release:** 1.1.0.0 (Release 1)  
 **Proposed next app release:** 1.2.0.0 — **not yet published**  
-**Milestone:** `KNX-MCP 1.2.0.0` — to be created by a repository maintainer in GitHub
+**Milestone:** [`KNX-MCP 1.2.0.0`](https://github.com/Docenko-Development/knx-mcp-community/milestone/1) — active; 14 open planned issues (#5–#17 and #19)
 
 > **Release commitment:** All items listed below are candidates for 1.2.0.0. An issue is only confirmed as delivered after the implementation and test evidence are recorded and the corresponding app version is actually published in MyKNX. Do not describe a bug as fixed merely because an issue was acknowledged or documentation changed.
 
@@ -54,12 +55,13 @@ The issues were reported for KNX-MCP 1.1.0.0, mainly using ETS6.3 and Claude Des
 | [#9](https://github.com/Docenko-Development/knx-mcp-community/issues/9) | Enhancement · Normal | Return internal parameter name and references where available through the ETS SDK; distinguish absent values from unsupported metadata and test variant application versions. |
 | [#10](https://github.com/Docenko-Development/knx-mcp-community/issues/10) | Enhancement · Normal | Explore batch links of {object, group_address} pairs with clear per-item results, permissions, validation, and documented undo/partial-failure behaviour. |
 | [#11](https://github.com/Docenko-Development/knx-mcp-community/issues/11) | Bug · High | Ensure `ga_find` role hints respect datapoint types and the linked object's actual role; a DPT 9.001 measurement must not be advised as DPT 1.001 Switch without evidence. |
-| [#12](https://github.com/Docenko-Development/knx-mcp-community/issues/12) | Bug · High | Reconcile advertised `max_name_length` (50) with longer accepted names; establish actual ETS persistence and clear validation/warning behaviour, without silent data loss. |
+| [#12](https://github.com/Docenko-Development/knx-mcp-community/issues/12) | Bug · High · Ready for test | Development build 1.1.0.1 adds validation against ETS's 255-character group-address name limit and clarifies project/address/range name limits. ETS6 checks reported for 255, 256 and 300 characters; complete release validation is outstanding. |
 | [#13](https://github.com/Docenko-Development/knx-mcp-community/issues/13) | Enhancement · Normal | Summarise repeated device-download-required warnings and affected devices in long operations while retaining actionable detail. Feedback discoverability is in #17. |
 | [#14](https://github.com/Docenko-Development/knx-mcp-community/issues/14) | Bug · High | Check stale or missing `ga_get_list` entries after `ga_move`; compare with `ga_find` and inspect multi-project isolation. Related to #5. |
 | [#15](https://github.com/Docenko-Development/knx-mcp-community/issues/15) | Enhancement · Normal | Add bounded paging and compact/field-selectable results for large group-address lists, with stable ordering and clear continuation. Related to #5. |
 | [#16](https://github.com/Docenko-Development/knx-mcp-community/issues/16) | Enhancement · Normal | Evaluate batch renumber / shift or swap options, explicit conflict handling, dry-run/preflight, affected devices, permissions and undo semantics. Related to #7. |
-| [#17](https://github.com/Docenko-Development/knx-mcp-community/issues/17) | Enhancement · Normal | Make bug/feature/support reporting discoverable from MCP clients. Prefer a clear public/private contact route; only consider a sending tool with explicit opt-in and privacy protections. Related to #13. |
+| [#17](https://github.com/Docenko-Development/knx-mcp-community/issues/17) | Enhancement · Normal | Make bug/feature/support reporting discoverable from MCP clients. Prefer an explicit user-confirmed route that does not transmit data itself. Related to #13. |
+| [#19](https://github.com/Docenko-Development/knx-mcp-community/issues/19) | Bug · High · Ready for test | ETS6 `ga_delete` failed with `MARKER_FAILED`; development build 1.1.0.1 deletes through the address's own group range. Five individual deletions and undo were verified in ETS6; ETS5 and related delete-path regression tests remain. |
 
 ### Split history and ownership
 
@@ -79,6 +81,7 @@ Keep all original and related issues **open** through investigation. Cross-refer
 - **#11** — erroneous `ga_find` role guidance.
 - **#12** — address-name limit/validation and response clarity.
 - **#8** — actionable diagnostics on object/DPT-size mismatch.
+- **#19** — validate the corrected ETS6 group-address delete path and follow-up delete regression cases.
 
 These affect confidence in AI-assisted inspection or edits and should be reproduced first.
 
@@ -97,6 +100,14 @@ These affect confidence in AI-assisted inspection or edits and should be reprodu
 - **#17** — discoverable support/feedback route.
 
 The order is a working proposal, not a restriction on parallel implementation. Tasks whose scope cannot be safely validated for 1.2.0.0 stay open and move to a later milestone with a clear reason.
+
+## Development progress — not yet a MyKNX release
+
+The following status is based on [public issue #12 comments](https://github.com/Docenko-Development/knx-mcp-community/issues/12) and [public issue #19 comments](https://github.com/Docenko-Development/knx-mcp-community/issues/19). These are maintainer-reported development tests, **not** independent validation of release 1.2.0.0.
+
+- **#12:** In development build `1.1.0.1`, `ga_create`, `ga_update` (including `names`) and `ga_create_range` validate the length before changing project data; `project_get_info` exposes additional explicit name-length fields, keeping its legacy field for compatibility. ETS6 boundary tests at 255, 256 and 300 characters are reported as successful.
+- **#19:** In development build `1.1.0.1`, `ga_delete` uses the group address's owning range instead of a read-only collection. ETS6 testing reports five single-address deletions with undo and subsequent re-deletion. ETS5 and deletion of ranges, trades and building parts still need regression checks.
+- Both issues are still **open** with `status:ready-for-test` and `area:group-addresses`, correctly indicating test candidates. They are not shipped fixes.
 
 ## Acceptance, validation and status transitions
 
@@ -123,17 +134,11 @@ Recommended test matrix: ETS6.3 (including the reported Build 7959 where relevan
 Example concise status comment (tailor to the actual work):
 > Thanks for the precise reproduction details. This is being tracked for the planned KNX-MCP 1.2.0.0 scope. We will verify the ETS behaviour and document the outcome here; no change is considered released until the updated app is available in MyKNX.
 
-## Milestone setup (one-time manual GitHub step)
+## Milestone and labels — active
 
-The currently connected GitHub interface can assign an **existing** milestone to an issue, but cannot create a milestone. A repository maintainer should:
+The maintainer has created [Milestone **KNX-MCP 1.2.0.0**](https://github.com/Docenko-Development/knx-mcp-community/milestone/1). As of the 15 October 2026 triage check, all **14 open issues** (#5–#17 and #19) are assigned. No completion is implied by milestone assignment.
 
-1. Open [GitHub Milestones](https://github.com/Docenko-Development/knx-mcp-community/milestones) → **New milestone**.
-2. Title: **KNX-MCP 1.2.0.0**.
-3. Description: **Planned improvements and fixes for KNX-MCP 1.2.0.0 (ETS5/ETS6). Final scope is subject to implementation, testing and MyKNX release validation.**
-4. Leave the due date empty unless a validated date has been agreed.
-5. Create the milestone, then assign the 13 open issues listed above as **candidates**, not completed work.
-
-Create the suggested area/priority/status labels separately in [Repository labels](https://github.com/Docenko-Development/knx-mcp-community/labels) if they do not exist. Review the milestone scope regularly.
+The labels `status:ready-for-test` and `area:group-addresses` are applied to #12 and #19. Other area/priority/status labels can be added as triage progresses; do not create a version label when a milestone already identifies the proposed release. Keep the milestone open until the actual MyKNX release and verification outcome are recorded.
 
 ## Release procedure
 
@@ -145,7 +150,7 @@ Create the suggested area/priority/status labels separately in [Repository label
 
 ## Public and internal sources
 
-- [Issue tracker](https://github.com/Docenko-Development/knx-mcp-community/issues) (original reports #5–#13, split follow-ups #14–#17).
+- [Issue tracker](https://github.com/Docenko-Development/knx-mcp-community/issues) (original reports #5–#13, split follow-ups #14–#17, new independently reported bug #19).
 - [Release 1 notes](../release-notes/1.1.0.0.md).
 - [KNX-MCP release index](../releases.md).
 - [Community support policy](../../SUPPORT.md).
