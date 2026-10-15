@@ -50,8 +50,12 @@ See [Getting started](docs/getting-started.md) for configuration details and tro
 - **Discussion categories and community guide:** [docs/community-guide.md](docs/community-guide.md)
 - **Bug reports:** https://github.com/Docenko-Development/knx-mcp-community/issues
 - **Skills:** [skills/README.md](skills/README.md) · [Project overview](skills/project-overview-read-only.md) · [Group-address review](skills/group-address-review-read-only.md)
-- **Release notes:** [1.1.0.0 · Release 1](docs/release-notes/1.1.0.0.md)
+- **App releases:** [Version history](docs/releases.md) · [GitHub Releases](https://github.com/Docenko-Development/knx-mcp-community/releases) · [Release 1 notes](docs/release-notes/1.1.0.0.md)
 - **Security:** [SECURITY.md](SECURITY.md)
+
+## App releases and downloads
+
+KNX-MCP app versions are distributed **only through the [KNX Online Shop (MyKNX)](https://my.knx.org/shop?action=search&search=KNX-MCP)**. The [version history](docs/releases.md) and [GitHub Releases](https://github.com/Docenko-Development/knx-mcp-community/releases) provide release information; no KNX-MCP ETS App installer or application source code is hosted here.
 
 ## What KNX-MCP does
 
