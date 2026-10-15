@@ -55,6 +55,9 @@ See [Getting started](docs/getting-started.md) for configuration details and tro
 
 ## App releases and downloads
 
+A [1.2.0.0 community issue plan](docs/roadmap/knx-mcp-1.2.0.0-issue-triage.md) tracks incoming feedback and proposed tests. **This version is planned, not yet released.**
+
+
 KNX-MCP app versions are distributed **only through the [KNX Online Shop (MyKNX)](https://my.knx.org/shop?action=search&search=KNX-MCP)**. The [version history](docs/releases.md) and [GitHub Releases](https://github.com/Docenko-Development/knx-mcp-community/releases) provide release information; no KNX-MCP ETS App installer or application source code is hosted here.
 
 ## What KNX-MCP does
