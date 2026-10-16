@@ -1,0 +1,34 @@
+name: Label agent reports
+
+# Reports created by an AI assistant through the GitHub API bypass the issue
+# form, so its labels are not applied. This adds them when the report carries
+# the footer written by KNX-MCP's feedback route.
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const body = issue.body || '';
+            if (!body.includes('Prepared by an AI assistant through KNX-MCP')) return;
+
+            const present = (issue.labels || []).map(label => label.name);
+            const missing = ['from-agent', 'triage'].filter(name => !present.includes(name));
+            if (missing.length === 0) return;
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              labels: missing
+            });
