@@ -1,0 +1,66 @@
+name: Report prepared by an AI agent
+description: Prepared by an AI assistant through KNX-MCP (server_get_feedback_route), reviewed and submitted by the user
+title: "[Agent] "
+labels: ["from-agent", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This report was prepared by an AI assistant. **Please review it before submitting.**
+        Remove customer data, project names, addresses of real buildings, passwords, keys and KNX Secure material.
+        Security vulnerabilities do not belong here - see [SECURITY.md](https://github.com/Docenko-Development/knx-mcp-community/blob/main/SECURITY.md).
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - Bug
+        - Feature request
+        - Documentation
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: KNX-MCP version
+      placeholder: "1.1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: ets
+    attributes:
+      label: ETS version
+      placeholder: "ETS6 (SDK 6.4.x) or ETS5 (SDK 5.7.x)"
+    validations:
+      required: true
+
+  - type: input
+    id: client
+    attributes:
+      label: MCP / AI client
+      placeholder: "Claude Desktop, Claude Code, Copilot, ChatGPT, Cursor, ..."
+
+  - type: input
+    id: tool
+    attributes:
+      label: Tool and error code
+      placeholder: "ga_get_list · INVALID_ARGUMENTS"
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened, and what was expected?
+      description: Short and anonymised, with the steps if known. No project export, no full tool output.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Review by the user
+      options:
+        - label: I have read this report and removed customer data, project files, passwords, access keys and KNX Secure secrets.
+          required: true
